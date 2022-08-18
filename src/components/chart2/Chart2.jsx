@@ -73,14 +73,14 @@ function Optionsdate({table}){
 
   return (
     <div className="chart">
-      <div className="selecta">
-        <div className="select">
+      <div className="selectflex">
+        <div className="selectsub">
       <label htmlFor="date">Choose country barrage:<tab/></label>
       <select class="custom-select" name="Date" id="date" value={formData.Date} onChange={handleChange}>
     <Optionsdate table={dates} />
 </select>
 </div>
-<div className="select">
+<div className="selectsub">
 <label htmlFor="field">Choose an index:<tab/></label>
 <select name="field" id="field"  value={formData.field} onChange={handleChange}>
     <Options table={fields()} />   

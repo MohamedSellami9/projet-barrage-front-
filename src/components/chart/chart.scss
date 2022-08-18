@@ -20,20 +20,22 @@
 .chartGrid {
   stroke: rgb(228, 225, 225);
 }
-.select{
+.selectsub{
   display: flex;
   align-items: center;
   justify-content: center;
   gap:1vw
 }
-.selecta{
+.selectflex{
   display: flex;
   align-items: center;
   justify-content: center;
   gap:4vw;
   position:relative
 }
-#field,#country{
-  position:absolute;
-  top:40px
+#field,#countryname,#date{
+  padding: 12px 10px;
+  font-size: 16px;
+  position: relative;
+  top:8px
 }

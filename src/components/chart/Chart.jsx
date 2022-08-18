@@ -79,16 +79,16 @@ let url=`/barrages/name/${formData.country}`
 
   return (
     <div className="chart">
- <div className="selecta">
-        <div className="select">
-      <label htmlFor="country">Choose country barrage:<tab/></label>
-      <select name="country" id="country" value={formData.country} onChange={handleChange}>
+ <div className="selectflex">
+        <div className="selectsub">
+      <label className="countrylabel" htmlFor="countryname">Choose country barrage:<tab/></label>
+      <select name="country" id="countryname" value={formData.country} onChange={handleChange}>
     <Options table={names} />
 </select>
 
 </div>
-<div className="select">
-<label htmlFor="field">Choose an index:<tab/></label>
+<div className="selectsub">
+<label htmlFor="field">Choose an index:</label>
 <select name="field" id="field"  value={formData.field} onChange={handleChange}>
     <Options table={fields()} />   
 </select>

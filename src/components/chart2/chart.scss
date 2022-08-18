@@ -19,20 +19,3 @@
 .chartGrid {
   stroke: rgb(228, 225, 225);
 }
-.select{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap:1vw
-}
-.selecta{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap:4vw;
-  position:relative
-}
-#field,#country,#date{
-  position:absolute;
-  top:40px
-}

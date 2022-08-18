@@ -87,13 +87,6 @@ const BarrageTable = () => {
                     setfield(params.row.index)
                     setDialog(params.row.value)
               }} className="viewButton">Edit</div>
-            
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete()}
-            >
-              Delete
-            </div>
           </div>
         );
       },
@@ -154,7 +147,7 @@ const BarrageTable = () => {
           
     </LocalizationProvider>
       <div className="select">
-      <label htmlFor="country">Choose country barrage:</label>
+      <label  htmlFor="country">Choose country barrage:</label>
       <select name="country" id="country" value={formData} onChange={handleChange3}>
     <Options table={alldata} />
     </select>
