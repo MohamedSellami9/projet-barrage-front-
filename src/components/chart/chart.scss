@@ -1,0 +1,39 @@
+.chart {
+  flex: 4;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  padding: 10px;
+  color: gray;
+
+  
+}
+
+.title {
+  margin-bottom: 20px;
+  
+}
+#title{
+  position: relative;
+  top:24px
+}
+
+.chartGrid {
+  stroke: rgb(228, 225, 225);
+}
+.select{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:1vw
+}
+.selecta{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:4vw;
+  position:relative
+}
+#field,#country{
+  position:absolute;
+  top:40px
+}

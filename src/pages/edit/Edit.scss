@@ -1,0 +1,20 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  gap: 0px;
+}
+.label{
+  font-size: 20px;
+  position: relative;
+  right:45px;
+}
+.formInput{
+  margin-bottom: 0px;
+}
+button{
+  font-size: large;
+  margin-top: 10px;
+}
