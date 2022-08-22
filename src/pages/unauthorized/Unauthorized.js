@@ -1,6 +1,6 @@
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
 import "./unauthorized.css"
+import { Link } from "react-router-dom";
 
 
 const Unauthorized=()=> {
@@ -8,16 +8,23 @@ const Unauthorized=()=> {
 
   return (
     <div className="new" >
-      <Sidebar />
-      <div className="newContainer">
-        <div className="right">
-          <h1>Unauthorized</h1>
+    <Sidebar />
+    <div className="newContainer">
+      <div className="right">
+      <div id="unauth">
+  <div class="unauth">
+    <div class="unauth-404"></div>
+    <h1>Unauthorized</h1>
+    <p>Oops! You Do Not Have Access To This Page</p>
+    <Link to="/">Back to homepage</Link>
+  </div>
+</div>
+      </div>
+      
+          
         </div>
-        
-            
-          </div>
-        </div>
- 
+      </div>
+
   );
 };
 

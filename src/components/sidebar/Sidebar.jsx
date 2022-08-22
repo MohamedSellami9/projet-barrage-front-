@@ -3,7 +3,6 @@ import "./sidebar.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -42,20 +41,21 @@ const Sidebar = () => {
             <span>Dashboard</span>  
           </li>
           </Link>
-          <p className="title">ADMIN</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          {auth?.roles==="Admin" && <p className="title">ADMIN</p>}
+          {auth?.roles==="Admin" && <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
-          </Link>
-          <Link to="/barrages" style={{ textDecoration: "none" }}>
+          </Link>}
+          {((auth?.roles==="Editor") ||(auth?.roles==="Admin") )&& <p className="title">EDITOR</p>}
+          {((auth?.roles==="Editor") ||(auth?.roles==="Admin") )&&<Link to="/barrages" style={{ textDecoration: "none" }}>
           <li>
             <WavesIcon className="icon" />
             <span>Barrages</span>
           </li>
-          </Link>
-          <p className="title">USER</p>
+          </Link>}
+          <p className="title">USER {auth?.roles? `:  ${auth?.roles}`:""}</p>
           {auth?.user? <li onClick={signOut} >
             <ExitToAppIcon className="icon" />
             <span >Logout</span>

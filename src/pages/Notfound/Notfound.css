@@ -10,13 +10,13 @@
         justify-content: center;
     }    
 
-    #unauth {
+    #notfound {
         position: relative;
         height: 100vh;
         left:20vw;
       }
       
-      #unauth .unauth {
+      #notfound .notfound {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -25,14 +25,14 @@
                 transform: translate(-50%, -50%);
       }
       
-      .unauth {
+      .notfound {
         max-width: 560px;
         width: 100%;
         padding-left: 160px;
         line-height: 1.1;
       }
       
-      .unauth .unauth-404 {
+      .notfound .notfound-404 {
         position: absolute;
         left: 0;
         top: 0;
@@ -43,7 +43,7 @@
         background-size: cover;
       }
       
-      .unauth .unauth-404:before {
+      .notfound .notfound-404:before {
         content: '';
         position: absolute;
         width: 100%;
@@ -56,53 +56,46 @@
         z-index: -1;
       }
       
-      .unauth h1 {
+      .notfound h1 {
         
-        font-size: 40px;
+        font-size: 65px;
         font-weight: 700;
         margin-top: 0px;
         margin-bottom: 10px;
         color: #151723;
         text-transform: uppercase;
-        position: relative;
-        top:25px
       }
       
-      .unauth h2 {
+      .notfound h2 {
         
-        font-size: 18px;
+        font-size: 21px;
         font-weight: 400;
         margin: 0;
         text-transform: uppercase;
         color: #151723;
       }
       
-      .unauth p {
+      .notfound p {
         
         color: #999fa5;
         font-weight: 400;
-        position: relative;
-        top:25px
-        
       }
       
-      .unauth a {
+      .notfound a {
         
         display: inline-block;
         font-weight: 700;
         border-radius: 40px;
         text-decoration: none;
         color: #6439ff;
-        position: relative;
-        top:26px
       }
       
       @media only screen and (max-width: 767px) {
-        .unauth .unauth-404 {
+        .notfound .notfound-404 {
           width: 110px;
           height: 110px;
         }
-        .unauth {
+        .notfound {
           padding-left: 15px;
           padding-right: 15px;
           padding-top: 110px;
