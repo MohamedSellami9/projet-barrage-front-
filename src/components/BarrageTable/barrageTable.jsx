@@ -29,8 +29,10 @@ const BarrageTable = () => {
     const [dialog, setDialog] = useState("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
+      
       const response1 = await axios.get(NAMES_URL);
       setAlldata(response1.data);   
+
       
      } ,[]) 
      console.log(alldata) 
@@ -48,12 +50,17 @@ const BarrageTable = () => {
   const [formData, setFormData] = useState("abid")
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
+    try{
     const response = await axios.post(BARRAGES_URL, JSON.stringify({"date": `${moment(value).format("YYYY-MM-DD")} 00:00:00`}),{
       headers: { 'Content-Type': 'application/json' },
   } );
     console.log(response.data)
 
     setTab(rows(response.data.filter((item)=>(item.Nom_Fr===formData))));
+}
+catch(err){
+  setTab([])
+}
 
    // eslint-disable-next-line no-use-before-define
    } ,[bool, value, formData])

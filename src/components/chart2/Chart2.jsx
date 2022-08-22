@@ -32,8 +32,8 @@ const URL="/barrages/date/";
     const o=data[0]
   if (Boolean(o)){
   return((Object.keys(o)).filter(function(value, index, arr){ 
-    return !((value === "_id") || (value === "Nom_Fr")|| (value === "Nom_Ar") || (value === "Date")|| (value === "id_barrage")|| (value === "Annee_prod")
-    || (value === "fonctionnel")|| (value === "Cap_tot_act") || (value === "Cote") || (value === "Bassin_versant")|| (value === "Longitude")|| (value === "Latitude")|| (value === "Cap_tot_init") );
+    return !((value === "_id") || (value === "Nom_Fr")|| (value === "Nom_Ar") || (value === "Date")|| (value === "id_barrage")
+    || (value === "Longitude")|| (value === "Latitude") );
 }));
   }return([])}
 
