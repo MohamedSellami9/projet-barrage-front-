@@ -4,7 +4,7 @@ import { userColumns } from "../../datatableBarrage";
 import { Link } from "react-router-dom";
 import { useState , useEffect} from "react";
 import axios from '../../api/axios';
-const BARRAGE_URL = '/barrages/date';
+const BARRAGE_URL = '/getBarrages/date';
 
 const List = () => {
   const [bool, setBool] = useState(false);
@@ -22,7 +22,6 @@ const List = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Barrages
       </div>
       <DataGrid
         className="datagrid"

@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import "./Edit.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
 import {useParams} from 'react-router-dom';
 import {useState,useEffect} from 'react'
 import axios from '../../api/axios';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const Edit = ({ inputs, title }) => {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const handleChange = event => {
   };
   const hundleclick =async (e)=>{
     e.preventDefault();
-    const response = await axios.put('/roles', {"username":`${data.username}`,
+     await axios.put('/roles', {"username":`${data.username}`,
   "roles":`${selected}`});
   
   

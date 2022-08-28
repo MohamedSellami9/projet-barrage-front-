@@ -9,20 +9,22 @@ import axios from '../../api/axios';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import Stack from '@mui/material/Stack';
 import moment from "moment";
-import { tableFooterClasses } from "@mui/material";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CircleLoader from "react-spinners/CircleLoader";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
 
-const BARRAGES_URL = '/barrages/date';
-const NAMES_URL="/barrages/names"
+const BARRAGES_URL = '/getBarrages/date';
+const NAMES_URL="/getBarrages/names"
 const BarrageTable = () => {
   
+  const { auth } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [field, setfield] = useState("");
     const [alldata, setAlldata] = useState([]);
@@ -45,26 +47,34 @@ const BarrageTable = () => {
         localStorage.setItem("date", JSON.stringify(newValue));
       };
   const [bool, setBool] = useState(false);
-  const [data, setData] = useState([]);
   const [tab,setTab]=useState([]);
   const [formData, setFormData] = useState("abid")
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(async () => {
-    try{
-    const response = await axios.post(BARRAGES_URL, JSON.stringify({"date": `${moment(value).format("YYYY-MM-DD")} 00:00:00`}),{
-      headers: { 'Content-Type': 'application/json' },
-  } );
-    console.log(response.data)
-
-    setTab(rows(response.data.filter((item)=>(item.Nom_Fr===formData))));
-}
-catch(err){
-  setTab([])
-}
+setIsLoading(true);
+    let isMounted = true;
+    try {
+      const response = await axios.post(BARRAGES_URL, JSON.stringify({"date": `${moment(value).format("YYYY-MM-DD")} 00:00:00`}),{
+        headers: { 'Content-Type': 'application/json' },
+    } );
+      console.log(response.data)
+  
+      setTab(rows(response.data.filter((item)=>(item.Nom_Fr===formData))));
+  }
+  catch (err) {
+    setTab([])
+    
+  }
+  finally {
+    console.log(tab);
+      isMounted && setIsLoading(false);
+  }
+  return () => isMounted = false;
 
    // eslint-disable-next-line no-use-before-define
    } ,[bool, value, formData])
-   console.log(data);
+  
    
    function handleChange3(e) {
     console.log(e)
@@ -74,11 +84,7 @@ catch(err){
    function Options({table}){
     return(table?.map(item=>(<option value={item}>{item}</option>)))}
   
-  const handleDelete = (id) => {
-
-    axios.delete(BARRAGES_URL, { data: { "id": `${id}` }})
-    setBool((prev)=>(!prev))
-  };
+  
   
   const actionColumn = [
     {
@@ -128,16 +134,38 @@ catch(err){
     setOpen(false);
   };
   const handleSubmit = async() => {
-    const response = await axios.put('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
+    console.log(auth?.roles)
+   await axios.put('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
     "Nom_Fr":`${formData}`,
     "field":`${field}`,
     "value":`${dialog}`
   });
+  
     setOpen(false);
     setBool((prev)=>(!prev))
   };
 
+  const style={
+    height:"400px",
 
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+}
+const hundleclick= async()=>{
+  const response=await axios.post('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
+    "Nom_Fr":`${formData}`
+  });
+  console.log(response.data)
+  setBool((prev)=>(!prev))
+}
+const hundleclick1= async()=>{
+  const response=await axios.delete('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
+    "Nom_Fr":`${formData}`
+  });
+  console.log(response.data)
+  setBool((prev)=>(!prev))
+}
 
   return (
     <div className="datatable">
@@ -159,14 +187,18 @@ catch(err){
     <Options table={alldata} />
     </select>
     </div>
-        <Link to="/users/new" className="link">
-          Add New
-        </Link>
+    <button className="link" onClick={hundleclick1}>
+      Delete
+    </button>
  
         
       </div>
 
-      <DataGrid
+  {isLoading
+                    ? <div style={style}><CircleLoader
+                    color="#6439ff"/></div>
+                    :(tab.length===0)? <div style={{height:"350px",display:"flex",justifyContent:"center",alignItems:"center",gap:"10px"}}><p style={{fontSize:"14px",color:"grey",position:"relative",top:"4px"}}>No Data Available</p><button style={{fontSize:"14px", backgroundColor:"#7451F8"}} onClick={hundleclick}>initialize all data to zeros</button></div>:    
+                    <DataGrid
         className="datagrid"
         rows={tab }
         columns={userColumns.concat(actionColumn)}
@@ -174,7 +206,7 @@ catch(err){
         rowsPerPageOptions={[8]}
         getRowId={(row) => row._id}
        
-      />
+      />}
       <div>
       <Dialog open={open} onClose={handleCancel}>
         <DialogTitle>Edit</DialogTitle>

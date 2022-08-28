@@ -1,6 +1,6 @@
 import "./barrage.scss"
 import Sidebar from "../../components/sidebar/Sidebar"
-import Navbar from "../../components/navbar/Navbar"
+
 import BarrageTable from "../../components/BarrageTable/barrageTable"
 
 const Barrage = () => {

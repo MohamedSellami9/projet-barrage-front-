@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from '../hooks/useAuth';
+import CircleLoader from "react-spinners/CircleLoader";
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +35,21 @@ const PersistLogin = () => {
         console.log(`isLoading: ${isLoading}`)
         console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
     }, [isLoading])
+    const style={
+        height:"100vh",
+        width:"100vw",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center"
+    }
 
     return (
         <>
             {
              
                  isLoading
-                    ? <p>Loading...</p>
+                    ? <div style={style}><CircleLoader
+                    color="#6439ff"/></div>
                     : <Outlet />
             }
         </>

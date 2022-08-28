@@ -2,7 +2,8 @@ import { useState , useEffect} from "react";
 import axios from '../../api/axios';
 import "./chart.scss";
 import moment from 'moment';
-import Select from 'react-select';
+import CircleLoader from "react-spinners/CircleLoader";
+
 import {
   AreaChart,
   Brush ,
@@ -36,14 +37,24 @@ const Chart = ({names, aspect, title }) => {
         field: "apports"
     }
 )
-let url=`/barrages/name/${formData.country}`
-
+let url=`/getBarrages/name/${formData.country}`
+const [isLoading, setIsLoading] = useState(true);
  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const response = await axios.get(url);
+    setIsLoading(true);
+    let isMounted = true;
+    try {
+      const response = await axios.get(url);
     setData(response.data.reverse());
-
+  }
+  catch (err) {
+      console.error(err);
+  }
+  finally {
+      isMounted && setIsLoading(false);
+  }
+  return () => isMounted = false;
    } ,[url])
   
   console.log(data)
@@ -76,6 +87,13 @@ let url=`/barrages/name/${formData.country}`
       .slice(0, 12);
      }
 
+     const style={
+      height:"400px",
+  
+      display:"flex",
+      justifyContent:"center",
+      alignItems:"center"
+  }
 
   return (
     <div className="chart">
@@ -97,10 +115,13 @@ let url=`/barrages/name/${formData.country}`
       <div className="title" id="title">{title}</div>
       
       <ResponsiveContainer width="100%" aspect={aspect}>
-        <AreaChart
+        {isLoading
+                    ? <div style={style}><CircleLoader
+                    color="#6439ff"/></div>
+                    :<AreaChart
           width={730}
           height={150}
-          data={data.reverse()}
+          data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
@@ -121,7 +142,7 @@ let url=`/barrages/name/${formData.country}`
             fill="url(#total)"
           />
           <Brush tickFormatter={xAxisTickFormatter} dataKey="Date" />
-        </AreaChart>
+        </AreaChart>}
         
       </ResponsiveContainer>
     

@@ -1,8 +1,10 @@
 import { useState , useEffect,PureComponent} from "react";
 import axios from '../../api/axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import "./chart.scss";
 import moment from "moment";
+import CircleLoader from "react-spinners/CircleLoader";
+
 
 
 
@@ -15,16 +17,28 @@ const Chart2 = ({dates, aspect, title }) => {
         field: "apports"
     }
 )
-const URL="/barrages/date/";
+const URL="/getBarrages/date/";
 
-
+const [isLoading, setIsLoading] = useState(true);
  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const response = await axios.post(URL, JSON.stringify({"date": formData.Date}),{
-      headers: { 'Content-Type': 'application/json' },
-  } );
-    setData(response.data);
+
+    setIsLoading(true);
+    let isMounted = true;
+    try {
+      const response = await axios.post(URL, JSON.stringify({"date": formData.Date}),{
+        headers: { 'Content-Type': 'application/json' },
+    } );
+      setData(response.data);
+  }
+  catch (err) {
+      console.error(err);
+  }
+  finally {
+      isMounted && setIsLoading(false);
+  }
+  return () => isMounted = false;
 
    } ,[formData])
   console.log(formData.Date)
@@ -59,7 +73,7 @@ function Optionsdate({table}){
   
   class CustomizedAxisTick extends PureComponent {
     render() {
-      const { x, y, stroke, payload } = this.props;
+      const { x, y, payload } = this.props;
   
       return (
         <g transform={`translate(${x},${y})`}>
@@ -70,7 +84,13 @@ function Optionsdate({table}){
       );
     }
   }
+  const style={
+    height:"400px",
 
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+}
   return (
     <div className="chart">
       <div className="selectflex">
@@ -90,6 +110,11 @@ function Optionsdate({table}){
       <div className="title" id="title">{title}</div>
       
       <ResponsiveContainer width="100%" aspect={aspect}>
+
+      {isLoading
+                    ? <div style={style}><CircleLoader
+                    color="#6439ff"/></div>
+                    :
         <BarChart
           width={730}
           height={250}
@@ -110,7 +135,7 @@ function Optionsdate({table}){
           <Bar dataKey={formData.field} fill="#8884d8"  />
         
             
-        </BarChart>
+        </BarChart>}
         
       </ResponsiveContainer>
     

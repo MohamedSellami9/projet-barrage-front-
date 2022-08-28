@@ -8,9 +8,9 @@ import Unauthorized from "./pages/unauthorized/Unauthorized";
 import Notfound from "./pages/Notfound/Notfound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
-import "./style/dark.scss";
+
 import { useContext } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
+
 import RequireAuth from './components/RequireAuth';
 import PersistLogin from './components/PersistLogin';
 import Barrage from './pages/barrage/barrage'
@@ -18,11 +18,10 @@ import AuthContext from "./context/AuthProvider";
 
 
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
   const { auth } = useContext(AuthContext);
   console.log(auth);
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={"app"}>
       <BrowserRouter>
         <Routes>
         <Route element={<PersistLogin />}>

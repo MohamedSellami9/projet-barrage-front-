@@ -8,15 +8,13 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import { Link,useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-import useLogout from "../../hooks/useLogout";
 import AuthContext from "../../context/AuthProvider";
+import useLogout from "../../hooks/useLogout";
 import WavesIcon from '@mui/icons-material/Waves';
 
 const Sidebar = () => {
   const navigate=useNavigate();
-  const { dispatch } = useContext(DarkModeContext);
   const { auth } = useContext(AuthContext);
   const logout=useLogout();
   const signOut= async()=>{
@@ -76,16 +74,6 @@ const Sidebar = () => {
           </li>   </Link></>
           }
         </ul>
-      </div>
-      <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
       </div>
     </div>
   );
