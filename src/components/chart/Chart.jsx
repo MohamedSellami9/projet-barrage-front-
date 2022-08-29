@@ -3,6 +3,7 @@ import axios from '../../api/axios';
 import "./chart.scss";
 import moment from 'moment';
 import CircleLoader from "react-spinners/CircleLoader";
+import { nanoid } from 'nanoid'
 
 import {
   AreaChart,
@@ -57,7 +58,6 @@ const [isLoading, setIsLoading] = useState(true);
   return () => isMounted = false;
    } ,[url])
   
-  console.log(data)
  
   function fields(){  
     const o=data[0]
@@ -69,10 +69,9 @@ const [isLoading, setIsLoading] = useState(true);
   
   }return([])}
   function Options({table}){
-    return(table?.map(item=>(<option value={item}>{item}</option>)))}
+    return(table?.map(item=>(<option key={nanoid()} value={item}>{item}</option>)))}
   
     function handleChange(e) {
-      console.log(e)
       const {name, value} = e.target
       setFormData(prevFormData => {
           return {

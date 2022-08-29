@@ -101,3 +101,16 @@
     position: absolute;
     top:27px
   }
+.deleteBarrage{
+  border: 1px solid grey;
+  padding: 5px 7px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+
+}
+.deleteBarrage:hover{
+background-color: rgb(163, 48, 48);
+color: white;
+
+}

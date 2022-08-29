@@ -20,7 +20,6 @@ const Edit = ({ inputs, title }) => {
     setSelected((response?.data?.roles==="Admin")?"Admin":((response?.data?.roles)==="Editor")?"Editor":"User")
   },[])
 
-console.log(data)  
 const handleChange = event => {
     setSelected(event.target.value);
   };

@@ -67,10 +67,7 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response))
-            //clear state and controlled inputs
+        
             setUser('');
             setPwd('');
             setEmail('');
@@ -89,7 +86,6 @@ const Register = () => {
         }
     }
     function verify(){
-        console.log((auth.user));
         if(Boolean(auth?.user)){
             navigate("/", { replace: true })
         }

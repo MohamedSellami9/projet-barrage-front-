@@ -12,8 +12,8 @@ const Unauthorized=()=> {
     <div className="newContainer">
       <div className="right">
       <div id="unauth">
-  <div class="unauth">
-    <div class="unauth-404"></div>
+  <div className="unauth">
+    <div className="unauth-404"></div>
     <h1>Unauthorized</h1>
     <p>Oops! You Do Not Have Access To This Page</p>
     <Link to="/">Back to homepage</Link>

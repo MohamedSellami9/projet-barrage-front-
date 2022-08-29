@@ -22,23 +22,18 @@ const Datatable = () => {
        setData(response.data);
   }
   catch (err) {
-    console.log(err)
   }
   finally {
       isMounted && setIsLoading(false);
   }
   return () => isMounted = false;
   },[bool])
-  console.log(data)
   const handleDelete = (id) => {
 
     axios.delete(USER_URL, { data: { "id": `${id}` }})
     setBool((prev)=>(!prev))
   };
 
-  function hundlecommit(e){
-    console.log(e.row)
-  }
 
   const actionColumn = [
     {
@@ -83,7 +78,6 @@ const Datatable = () => {
      
         className="datagrid"
         rows={data}
-        onCellEditCommit={hundlecommit}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}

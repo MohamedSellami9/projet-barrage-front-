@@ -17,14 +17,12 @@ const Home = () => {
     const response1 = await axios.get(BARRAGE_URL);
     setAlldata(response1.data);   
    } ,[]) 
-   console.log(alldata) 
    const [date, setDate] = useState([]);
    // eslint-disable-next-line react-hooks/exhaustive-deps
    useEffect(async () => {
      const response1 = await axios.get("/getBarrages/datee");
      setDate(response1.data);   
     } ,[]) 
-    console.log(date) 
   return (
     <div className="home">
       <Sidebar />

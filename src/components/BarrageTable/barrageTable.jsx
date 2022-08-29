@@ -19,6 +19,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CircleLoader from "react-spinners/CircleLoader";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
+import { nanoid } from 'nanoid'
 
 const BARRAGES_URL = '/getBarrages/date';
 const NAMES_URL="/getBarrages/names"
@@ -37,7 +38,6 @@ const BarrageTable = () => {
 
       
      } ,[]) 
-     console.log(alldata) 
 
     const [value, setValue] = useState(
       JSON.parse(localStorage.getItem("date"))||Date.now(),      );
@@ -58,7 +58,6 @@ setIsLoading(true);
       const response = await axios.post(BARRAGES_URL, JSON.stringify({"date": `${moment(value).format("YYYY-MM-DD")} 00:00:00`}),{
         headers: { 'Content-Type': 'application/json' },
     } );
-      console.log(response.data)
   
       setTab(rows(response.data.filter((item)=>(item.Nom_Fr===formData))));
   }
@@ -67,7 +66,6 @@ setIsLoading(true);
     
   }
   finally {
-    console.log(tab);
       isMounted && setIsLoading(false);
   }
   return () => isMounted = false;
@@ -77,12 +75,11 @@ setIsLoading(true);
   
    
    function handleChange3(e) {
-    console.log(e)
     const {value} = e.target
     setFormData(value)
 }
    function Options({table}){
-    return(table?.map(item=>(<option value={item}>{item}</option>)))}
+    return(table?.map(item=>(<option key={nanoid()} value={item}>{item}</option>)))}
   
   
   
@@ -134,7 +131,6 @@ setIsLoading(true);
     setOpen(false);
   };
   const handleSubmit = async() => {
-    console.log(auth?.roles)
    await axios.put('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
     "Nom_Fr":`${formData}`,
     "field":`${field}`,
@@ -156,14 +152,10 @@ const hundleclick= async()=>{
   const response=await axios.post('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
     "Nom_Fr":`${formData}`
   });
-  console.log(response.data)
   setBool((prev)=>(!prev))
 }
 const hundleclick1= async()=>{
-  const response=await axios.delete('/barrages', {"Date":`${moment(value).format("YYYY-MM-DD")} 00:00:00`,
-    "Nom_Fr":`${formData}`
-  });
-  console.log(response.data)
+  const response=await axios.delete(`/barrages/${formData}&${moment(value).format("YYYY-MM-DD")} 00:00:00`);
   setBool((prev)=>(!prev))
 }
 
@@ -187,9 +179,9 @@ const hundleclick1= async()=>{
     <Options table={alldata} />
     </select>
     </div>
-    <button className="link" onClick={hundleclick1}>
+    <div className="deleteBarrage" onClick={hundleclick1}>
       Delete
-    </button>
+    </div>
  
         
       </div>

@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import "./chart.scss";
 import moment from "moment";
 import CircleLoader from "react-spinners/CircleLoader";
-
+import { nanoid } from 'nanoid'
 
 
 
@@ -41,7 +41,6 @@ const [isLoading, setIsLoading] = useState(true);
   return () => isMounted = false;
 
    } ,[formData])
-  console.log(formData.Date)
   function fields(){  
     const o=data[0]
   if (Boolean(o)){
@@ -53,15 +52,14 @@ const [isLoading, setIsLoading] = useState(true);
 
 
   function Options({table}){
-   return(table?.map(item=>(<option value={item}>{item}</option>)))}
+   return(table?.map(item=>(<option key={nanoid()} value={item}>{item}</option>)))}
   
 function Optionsdate({table}){
-   return(table?.map(item=>(<option value={item}>{moment(item)
+   return(table?.map(item=>(<option key={nanoid()} value={item}>{moment(item)
     .format("ll")
     .slice(0, 12)}</option>)))}
 
     function handleChange(event) {
-      console.log(event)
       const {name, value} = event.target
       setFormData(prevFormData => {
           return {
@@ -96,7 +94,7 @@ function Optionsdate({table}){
       <div className="selectflex">
         <div className="selectsub">
       <label htmlFor="date">Choose country barrage:<tab/></label>
-      <select class="custom-select" name="Date" id="date" value={formData.Date} onChange={handleChange}>
+      <select className="custom-select" name="Date" id="date" value={formData.Date} onChange={handleChange}>
     <Optionsdate table={dates} />
 </select>
 </div>

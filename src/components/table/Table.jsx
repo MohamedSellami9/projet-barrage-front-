@@ -17,7 +17,6 @@ const List = () => {
     setData(response.data);
 
    } ,[])
-  console.log(data)
   
   return (
     <div className="datatable">
