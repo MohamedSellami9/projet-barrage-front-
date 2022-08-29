@@ -188,8 +188,8 @@ const hundleclick1= async()=>{
 
   {isLoading
                     ? <div style={style}><CircleLoader
-                    color="#6439ff"/></div>
-                    :(tab.length===0)? <div style={{height:"350px",display:"flex",justifyContent:"center",alignItems:"center",gap:"10px"}}><p style={{fontSize:"14px",color:"grey",position:"relative",top:"4px"}}>No Data Available</p><button style={{fontSize:"14px", backgroundColor:"#7451F8"}} onClick={hundleclick}>initialize all data to zeros</button></div>:    
+                    color="#3B7DB2"/></div>
+                    :(tab.length===0)? <div style={{height:"350px",display:"flex",justifyContent:"center",alignItems:"center",gap:"10px"}}><p style={{fontSize:"14px",color:"grey",position:"relative",top:"4px"}}>No Data Available</p><button style={{fontSize:"14px", backgroundColor:"#007000"}} onClick={hundleclick}>initialize all data to zeros</button></div>:    
                     <DataGrid
         className="datagrid"
         rows={tab }

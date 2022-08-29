@@ -72,7 +72,7 @@ const Datatable = () => {
       </div>
       {isLoading
                     ? <div style={style}><CircleLoader
-                    color="#6439ff"/></div>
+                    color="#3B7DB2"/></div>
                     :
       <DataGrid
      

@@ -111,7 +111,7 @@ function Optionsdate({table}){
 
       {isLoading
                     ? <div style={style}><CircleLoader
-                    color="#6439ff"/></div>
+                    color="#3B7DB2"/></div>
                     :
         <BarChart
           width={730}
@@ -121,8 +121,8 @@ function Optionsdate({table}){
           barSize={5}
         >
           <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="5%" stopColor="#007000" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#007000" stopOpacity={0} />
             </linearGradient>
           <XAxis dataKey="Nom_Fr" scale="point" interval={0} padding={{ left: 10, right: 10 } } tick={<CustomizedAxisTick />}   />
           <YAxis />
@@ -130,7 +130,7 @@ function Optionsdate({table}){
           <Tooltip />
       
           <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey={formData.field} fill="#8884d8"  />
+          <Bar dataKey={formData.field} fill="#439E01"  />
         
             
         </BarChart>}
